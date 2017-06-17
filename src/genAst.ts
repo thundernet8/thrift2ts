@@ -772,7 +772,7 @@ module.exports = (code: string): object => {
     const readName = (): string => {
         let i = 0;
         let char = code[offset];
-        while (/[a-zA-Z0-9_]/.test(char)) { // TODO cound a dot exist in a name?
+        while (/[a-zA-Z0-9_\.]/.test(char)) {
             char = code[offset + ++i];
         }
 
