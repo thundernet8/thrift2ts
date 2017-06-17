@@ -77,9 +77,17 @@ interface IServiceSubjectBlock extends ISubjectBlock {
 interface IServiceSubjectFunction {
     type: string|IDataType;
     name: string;
-    args: any[];
+    args: IServiceSubjectFunctionArg[];
     throws: any[];
     oneway: boolean;
+    headComment?: string;
+    tailComment?: string;
+}
+
+interface IServiceSubjectFunctionArg {
+    index: number;
+    type: string|IDataType;
+    name: string;
 }
 
 // Types
@@ -106,9 +114,6 @@ let simplifyDataType = (type: IDataType): string|IDataType => {
 
 module.exports = (code: string): object => {
     code = code.toString();
-
-    // replace \r\n \r to \n
-    // code = code.replace(/[\r|\r\n]/g, "\n");
 
     let nCount = 0; // count of \n
     let rCount = 0; // count of \r
@@ -244,6 +249,19 @@ module.exports = (code: string): object => {
         readNewLineSpace();
     }
 
+    const readCommentFromQueue = (isTail = false): string => {
+        let queue = isTail ? tailCommentQueue : headCommentQueue;
+        let comments = []
+        let comment: string;
+        while (comment = queue.shift()) {
+            if (comment.startsWith('#')) {
+                comment = '//' + comment.slice(1);
+            }
+            comments.push(comment);
+        }
+        return comments.join('\r\n');
+    }
+
     const readUntilThrow = (transaction: () => void, key?: string): any => {
         let container: any = key ? {} : [];
         while (true) {
@@ -303,7 +321,9 @@ module.exports = (code: string): object => {
         let type = readType();
         let name = readName();
         readComma();
-        return {subject, type, name}
+        let headComment = readCommentFromQueue();
+        let tailComment = readCommentFromQueue(true);
+        return {subject, type, name, headComment, tailComment}
     }
 
     const readConst = (): ISubjectBlock => {
@@ -312,7 +332,9 @@ module.exports = (code: string): object => {
         let name = readName();
         let value = readAssign();
         readComma();
-        return {subject, type, name, value};
+        let headComment = readCommentFromQueue();
+        let tailComment = readCommentFromQueue(true);
+        return {subject, type, name, value, headComment, tailComment};
     }
 
     const readEnum = (): IListSubjectBlock => {
@@ -321,8 +343,10 @@ module.exports = (code: string): object => {
             name: 'enum'
         };
         let name = readName();
+        let headComment = readCommentFromQueue();
+        let tailComment = readCommentFromQueue(true);
         let items = readEnumBlock();
-        return {subject, type, name, items};
+        return {subject, type, name, items, headComment, tailComment};
     }
 
     const readEnumBlock = (): IListSubjectItem[] => {
@@ -337,7 +361,9 @@ module.exports = (code: string): object => {
         let type = 'enum';
         let value = readAssign();
         readComma();
-        return {name, type, value}
+        let headComment = readCommentFromQueue();
+        let tailComment = readCommentFromQueue(true);
+        return {name, type, value, headComment, tailComment}
     }
 
     const readStruct = (): IListSubjectBlock => {
@@ -346,8 +372,10 @@ module.exports = (code: string): object => {
             name: 'struct'
         };
         let name = readName();
+        let headComment = readCommentFromQueue();
+        let tailComment = readCommentFromQueue(true);
         let items = readStructLikeBlock();
-        return {subject, type, name, items};
+        return {subject, type, name, items, headComment, tailComment};
     }
 
     const readStructLikeBlock = (): IListSubjectItem[] => {
@@ -375,7 +403,9 @@ module.exports = (code: string): object => {
         let name = readName();
         let value = readAssign();
         readComma();
-        let result: IListSubjectItem = {id, type, name};
+        let headComment = readCommentFromQueue();
+        let tailComment = readCommentFromQueue(true);
+        let result: IListSubjectItem = {id, type, name, headComment, tailComment};
         if (option !== undefined) {
             result.option = option;
         }
@@ -391,8 +421,10 @@ module.exports = (code: string): object => {
             name: 'union'
         };
         let name = readName();
+        let headComment = readCommentFromQueue();
+        let tailComment = readCommentFromQueue(true);
         let items = readStructLikeBlock();
-        return {subject, type, name, items};
+        return {subject, type, name, items, headComment, tailComment};
     }
 
     const readException = (): IListSubjectBlock => {
@@ -401,11 +433,13 @@ module.exports = (code: string): object => {
             name: 'exception'
         };
         let name = readName();
+        let headComment = readCommentFromQueue();
+        let tailComment = readCommentFromQueue(true);
         let items = readStructLikeBlock();
-        return {subject, type, name, items};
+        return {subject, type, name, items, headComment, tailComment};
     }
 
-    const readExtends = (): any => {
+    const readExtends = (): string => {
         try {
             backup();
             readKeyword('extends');
@@ -426,8 +460,10 @@ module.exports = (code: string): object => {
         };
         let name = readName();
         let extend = readExtends();
+        let headComment = readCommentFromQueue();
+        let tailComment = readCommentFromQueue(true);
         let functions = readServiceBlock();
-        let result: IServiceSubjectBlock = {subject, type, name};
+        let result: IServiceSubjectBlock = {subject, type, name, headComment, tailComment};
         if (extend !== undefined) {
             result.extends = extend;
         }
@@ -448,10 +484,12 @@ module.exports = (code: string): object => {
         let oneway = !!readWith(readOneway, () => {});
         let type = simplifyDataType(readType()); // function return type
         let name = readName();
+        let headComment = readCommentFromQueue();
         let args = readServiceArgs();
+        let tailComment = readCommentFromQueue(true);
         let throws = readServiceThrow();
         readComma();
-        return {type, name, args, throws, oneway};
+        return {type, name, args, throws, oneway, headComment, tailComment};
     }
 
     const readServiceArgs = (): any[] => {
@@ -498,7 +536,9 @@ module.exports = (code: string): object => {
         readSpace();
         // read `com.company.service` in sample
         let serviceName = readRefValue().join('.');
-        return {subject, type, name, value: serviceName}
+        let headComment = readCommentFromQueue();
+        let tailComment = readCommentFromQueue(true);
+        return {subject, type, name, value: serviceName, headComment, tailComment}
     }
 
     const readInclude = (): ISubjectBlock => {
@@ -510,7 +550,9 @@ module.exports = (code: string): object => {
         let includePath = readQuotation();
         let name = includePath.replace(/^.*?([^/\\]*?)(?:\.thrift)?$/, '$1');
         readSpace();
-        return {subject, type, name, value: includePath};
+        let headComment = readCommentFromQueue();
+        let tailComment = readCommentFromQueue(true);
+        return {subject, type, name, value: includePath, headComment, tailComment};
     }
 
     const readQuotation = (): string => {
@@ -796,7 +838,7 @@ module.exports = (code: string): object => {
                         ast[subject][name] = block;
                 }
             } catch (exception) {
-                throwError(exception); // TODO Error type
+                throwError(exception);
             } finally {
                 if (code.length === offset) break;
             }
