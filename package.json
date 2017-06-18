@@ -2,7 +2,7 @@
   "name": "thrift2ts",
   "version": "0.1.0",
   "description": "A thrift to typescript parser",
-  "main": "test.js",
+  "main": "./lib/index.js",
   "repository": "git@github.com:thundernet8/thrift2ts.git",
   "author": "wuxueqian <wuxueqian2010@hotmail.com>",
   "license": "MIT",
