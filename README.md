@@ -2,6 +2,10 @@
 
 Parse Thrift (IDL) to TypeScript.
 
+[Thrift Doc](https://thrift.apache.org/docs/idl)
+
+[TypeScript Doc](https://www.typescriptlang.org/docs/home.html)
+
 ## Install
 
 npm
