@@ -17,12 +17,12 @@ const argv = yargs
     .argv;
 
 const extName = extname(argv.i);
-const inputFile = resolve(argv.i + extName ? '' : '.thrift');
+const inputFile = resolve(argv.i + (extName ? '' : '.thrift'));
 const baseName = basename(argv.i, extName).replace('.', '');
-const outputFile = resolve(dirname(argv.o), baseName + 'Service.ts');
+const outputFile = extname(argv.o).replace('.', '').toLowerCase() === 'ts' ? resolve(argv.o) : resolve(argv.o, baseName + 'Service.ts');
 
 try {
-    mkdirp(resolve(dirname(argv.o)));
+    mkdirp(resolve(dirname(outputFile)));
     const tsCode = genTS(genAST(readFileSync(inputFile).toString()), argv.w);
     writeFileSync(outputFile, tsCode);
 } catch (err) {
