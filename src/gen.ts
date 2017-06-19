@@ -1,6 +1,6 @@
-let genAST = require('./genAst');
-let genTS = require('./genTS');
+import genAST from './genAst';
+import genTS from './genTS';
 
-module.exports = (code: string, webAPIPath: string) => {
+export default (code: string, webAPIPath: string) => {
     return genTS(genAST(code), webAPIPath);
 }
