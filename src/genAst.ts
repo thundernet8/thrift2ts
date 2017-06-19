@@ -112,7 +112,7 @@ let simplifyDataType = (type: IDataType): string|IDataType => {
     }
 }
 
-module.exports = (code: string): object => {
+export default (code: string): object => {
     code = code.toString();
 
     let nCount = 0; // count of \n

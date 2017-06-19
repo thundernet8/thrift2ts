@@ -2,12 +2,20 @@
   "name": "thrift2ts",
   "version": "0.1.0",
   "description": "A thrift to typescript parser",
-  "main": "./lib/index.js",
+  "main": "./lib/gen.js",
+  "bin": {
+    "thrift2ts": "./bin/thrift2ts"
+  },
+  "scripts": {
+    "build": "tsc" 
+  },
   "repository": "git@github.com:thundernet8/thrift2ts.git",
   "author": "wuxueqian <wuxueqian2010@hotmail.com>",
   "license": "MIT",
   "dependencies": {
     "@types/node": "^7.0.29",
-    "typescript": "^2.3.4"
+    "mkdirp": "^0.5.1",
+    "typescript": "^2.3.4",
+    "yargs": "^8.0.2"
   }
 }

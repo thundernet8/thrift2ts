@@ -209,7 +209,7 @@ const defaultExportsHandler = (): string => {
     return code;
 }
 
-module.exports = (ast: any, webAPIPath = './webAPI'): string => {
+export default (ast: any, webAPIPath = './webAPI'): string => {
     let code = '';
 
     code += header;
