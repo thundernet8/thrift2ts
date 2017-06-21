@@ -1,6 +1,6 @@
 {
   "name": "thrift2ts",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A thrift to typescript parser",
   "main": "./lib/gen.js",
   "bin": {
