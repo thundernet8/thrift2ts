@@ -22,12 +22,12 @@ yarn global add thrift2ts
 
 ### CLI
 ```
-t2t -i [thrift file path] -o [typescript file output folder] -w [webApi import path]
+t2t -i [thrift file path] -o [typescript file output folder] -r [request method import path]
 ```
 
 sample
 ```
-t2t -i ./common.thrift -o ./services -w ./webApi
+t2t -i ./common.thrift -o ./services -w ./request
 ```
 
 ### normal package
@@ -35,7 +35,7 @@ t2t -i ./common.thrift -o ./services -w ./webApi
 var thrift2ts = require('thrift2ts');
 var thriftCode = 'XXX';
 
-var tsCode = thrift2ts(thriftCode, './webApi')
+var tsCode = thrift2ts(thriftCode, './request')
 ```
 
 ## Example
