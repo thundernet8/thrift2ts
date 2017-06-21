@@ -115,9 +115,9 @@ export enum EmployeeType {
 }
 
 export interface NetworkException {
-    code: number,
-    message: string,
-    url?: string
+    code: number;
+    message: string;
+    url?: string;
 }
 
 export interface Employee {
