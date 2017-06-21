@@ -27,7 +27,7 @@ t2t -i [thrift file path] -o [typescript file output folder] -r [request method 
 
 sample
 ```
-t2t -i ./common.thrift -o ./services -w ./request
+t2t -i ./common.thrift -o ./services -r ./request
 ```
 
 ### normal package
