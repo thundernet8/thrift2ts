@@ -15,19 +15,19 @@ npm install thrift2ts -g
 
 yarn
 ```
-yarn add thrift2ts
+yarn global add thrift2ts
 ```
 
 ## Usage
 
 ### CLI
 ```
-thrift2ts -i [thrift file path] -o [typescript file output folder] -w [webApi import path]
+t2t -i [thrift file path] -o [typescript file output folder] -w [webApi import path]
 ```
 
 sample
 ```
-thrift2ts -i ./common.thrift -o ./services -w ./webApi
+t2t -i ./common.thrift -o ./services -w ./webApi
 ```
 
 ### normal package
