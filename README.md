@@ -127,11 +127,11 @@ export interface Employee {
 }
 
 export function QueryEmployee(age: number): Promise<Employee[]> {
-    return webApi<Employee[]>("EmployeeOperator.QueryEmployee", { age })
+    return Request<Employee[]>("EmployeeOperator.QueryEmployee", { age })
 }
 
 export function OperateEmployeeSalaryByType(type: EmployeeType, amount: number, note: string): Promise<boolean> {
-    return webApi<boolean>("EmployeeSalaryOperator.OperateEmployeeSalaryByType", { type, amount, note })
+    return Request<boolean>("EmployeeSalaryOperator.OperateEmployeeSalaryByType", { type, amount, note })
 }
 
 
@@ -144,6 +144,8 @@ export default {
 
 ## Issues
 
-### Why import webApi
+### Why import Request
 
-Thrift service will exploded into functions which are used for RPC-liked call, a common API request instance is required, and accept method string, POST data as parameters. We donnot concern about which request approach(AJAX, Fetch) or libraries(axios, jQuery, fetch-io) you'd like to use, but you must provide the webApi implementation file path for importing.
+Thrift service will exploded into functions which are used for RPC-liked call or webApi request, a common request instance is required, and accept method string, POST data as parameters. We donnot concern about which request approach(AJAX, Fetch) or libraries(axios, jQuery, fetch-io) you'd like to use, but you must provide the request implementation file path for importing.
+
+Please find the examples in sample folder.

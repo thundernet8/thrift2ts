@@ -11,14 +11,14 @@ const argv = yargs
     })
     .alias('v', 'version')
     .usage('Usage: $0 <command> [options]')
-    .example('$0 -i ./member.thrift -o ./services -w ./webApi', '')
+    .example('$0 -i ./member.thrift -o ./services -w ./request', '')
     .demandOption(['i'])
     .default('o', './services')
-    .default('w', './webApi')
+    .default('r', './request')
     .describe('i', 'Input thrift file path')
     .describe('o', 'Ouput typescript file folder')
-    .describe('w', 'webApi request implementation file path, will be imported in generated typescript file')
-    .epilog('Copyright 2017')
+    .describe('w', 'webApi or JSON-RPC request implementation file path, will be imported in generated typescript file')
+    .epilog('Copyright ' + new Date().getFullYear())
     .argv;
 
 const extName = extname(argv.i);

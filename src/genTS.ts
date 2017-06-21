@@ -186,7 +186,7 @@ const serviceFunctionHandler = (name, serviceFunc): string => {
     })
 
     code += `\r\nexport function ${serviceFunc['name']}(${argNameAndTypes.join(', ')}): Promise<${returnType}> {\r\n`;
-    code += `    return webApi<${returnType}>("${method}", { ${argNames.join(', ')} })`;
+    code += `    return Request<${returnType}>("${method}", { ${argNames.join(', ')} })`;
     code += '\r\n}\r\n'
 
     defaultExports.push(serviceFunc['name']);
@@ -206,14 +206,14 @@ const defaultExportsHandler = (): string => {
     return code;
 }
 
-export default (ast: any, webAPIPath = './webAPI'): string => {
+export default (ast: any, Request = './request'): string => {
     let code = '';
 
     code += header;
 
-    // include webApi
-    if (webAPIPath) {
-        code += `import webApi from "${webAPIPath}";\r\n`
+    // include Request
+    if (Request) {
+        code += `import Request from "${Request}";\r\n`
     }
 
     // includes -> import
