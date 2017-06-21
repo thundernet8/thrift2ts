@@ -147,10 +147,7 @@ const structLikeHandler = (name, items: object[]): string => {
         if (item['option'] === 'optional') {
             code += '?';
         }
-        code += `: ${valueTypeTransformer(item['type'])}`;
-        if (index < items.length - 1) {
-            code += ','
-        }
+        code += `: ${valueTypeTransformer(item['type'])};`;
     })
     code += '\r\n}\r\n';
 

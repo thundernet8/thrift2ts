@@ -121,9 +121,9 @@ export interface NetworkException {
 }
 
 export interface Employee {
-    name: string,
-    age?: number,
-    tasks: {[key: string]: number}
+    name: string;
+    age?: number;
+    tasks: {[key: string]: number};
 }
 
 export function QueryEmployee(age: number): Promise<Employee[]> {
@@ -144,6 +144,6 @@ export default {
 
 ## Issues
 
-### Why webApi
+### Why import webApi
 
-Thrift service will exploded into functions which are for RPC call, a common API request instance is required, and accept method string, POST data as parameters. We donnot concern about which request approach(AJAX, Fetch) or libraries(axios, jQuery, fetch-io) you'd like to use, but you must provide the webApi implementation file path for importing.
+Thrift service will exploded into functions which are used for RPC-liked call, a common API request instance is required, and accept method string, POST data as parameters. We donnot concern about which request approach(AJAX, Fetch) or libraries(axios, jQuery, fetch-io) you'd like to use, but you must provide the webApi implementation file path for importing.

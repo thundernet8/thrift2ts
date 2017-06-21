@@ -12,7 +12,7 @@ const argv = yargs
     .default('w', './webApi')
     .describe('i', 'Input thrift file path')
     .describe('o', 'Ouput typescript file folder')
-    .describe('w', 'Typescript import webApi file path')
+    .describe('w', 'webApi request implementation file path, will be imported in generated typescript file')
     .epilog('Copyright 2017')
     .argv;
 
