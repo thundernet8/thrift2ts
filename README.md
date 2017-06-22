@@ -32,7 +32,7 @@ t2t -i ./common.thrift -o ./services -r ./request
 
 ### normal package
 ```
-var thrift2ts = require('thrift2ts');
+var thrift2ts = require('thrift2ts').default;
 var thriftCode = 'XXX';
 
 var tsCode = thrift2ts(thriftCode, './request')
@@ -95,7 +95,7 @@ Convert to TypeScript
  * Mon Jun 19 2017 22:42:06 GMT+0800 (CST)
  */
 
-import webApi from "./webApi";
+import Request from "./request";
 
 import * as Common from "./CommonService";
 
