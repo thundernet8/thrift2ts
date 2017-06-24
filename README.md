@@ -1,6 +1,6 @@
 ## Thrift2TS
 
-Parse Thrift (IDL) to TypeScript.
+Parse Thrift (IDL) to TypeScript, which could be used as typed interface docs for FrontEnd.
 
 [Thrift Doc](https://thrift.apache.org/docs/idl)
 
@@ -149,3 +149,7 @@ export default {
 Thrift service will exploded into functions which are used for RPC-liked call or webApi request, a common request instance is required, and accept method string, POST data as parameters. We donnot concern about which request approach(AJAX, Fetch) or libraries(axios, jQuery, fetch-io) you'd like to use, but you must provide the request implementation file path for importing.
 
 Please find the examples in sample folder.
+
+ * [HTTP-RPC-Request](./sample/json-rpc-request.ts)
+
+ * [HTTP-API-Request](./sample/webApi-request.ts)
