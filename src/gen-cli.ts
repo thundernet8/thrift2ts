@@ -1,7 +1,7 @@
 import { resolve, dirname, basename, extname } from "path";
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import genAST from './genAst';
-import genTS from './genTS';
+import genTS from './genServiceClient';
 import * as mkdirp from 'mkdirp';
 import * as yargs from 'yargs';
 
@@ -26,9 +26,13 @@ const argv = yargs
 // const baseName = basename(argv.i, extName).replace('.', '');
 // const outputFile = extname(argv.o).replace('.', '').toLowerCase() === 'ts' ? resolve(argv.o) : resolve(argv.o, baseName + 'Service.ts');
 
-const resolveInput = (input) => {
+const resolveInput = (input: string, basePath?: string) => {
+    if (!input.startsWith('.')) {
+        input = './' + input // thrift can include without relative path chars, e.g include "share.thrift"
+    }
     const extName = extname(input);
-    return resolve(input + (extName ? '' : '.thrift'));
+    let paths = [basePath, input + (extName ? '' : '.thrift')];
+    return resolve(...paths.filter(x => !!x));
 }
 
 const resolveOutput = (input, primary = false) => {
@@ -48,8 +52,11 @@ const resolveOutput = (input, primary = false) => {
 try {
     let handledFiles = [];
     let primary = true;
-    const recursiveGen = (input) => {
-        let inputFile = resolveInput(input);
+    const recursiveGen = (input, basePath = null) => {
+        let inputFile = resolveInput(input, basePath);
+        if (!basePath) {
+            basePath = dirname(inputFile)
+        }
         if (!existsSync(inputFile)) {
             throw new Error(`The specified file <${input}> is not exists`);
         }
@@ -67,7 +74,7 @@ try {
         if (ast['include']) {
             let includes: object[] = Object.keys(ast['include']).map(key => ast['include'][key]['value']);
             includes.forEach(include => {
-                recursiveGen(include);
+                recursiveGen(include, basePath);
             })
         }
     }
