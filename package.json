@@ -8,7 +8,7 @@
     "t2t": "./bin/t2t"
   },
   "scripts": {
-    "build": "tsc" 
+    "build": "tsc"
   },
   "repository": "git@github.com:thundernet8/thrift2ts.git",
   "author": "wuxueqian <wuxueqian2010@hotmail.com>",
