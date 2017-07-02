@@ -1,0 +1,287 @@
+{
+    "include": {
+        "shared": {
+            "type": {
+                "name": "include"
+            },
+            "value": "shared.thrift",
+            "headComment": "",
+            "tailComment": ""
+        }
+    },
+    "namespace": {
+        "cpp": {
+            "type": {
+                "name": "namespace"
+            },
+            "value": "tutorial",
+            "headComment": "",
+            "tailComment": ""
+        },
+        "d": {
+            "type": {
+                "name": "namespace"
+            },
+            "value": "tutorial",
+            "headComment": "",
+            "tailComment": ""
+        },
+        "dart": {
+            "type": {
+                "name": "namespace"
+            },
+            "value": "tutorial",
+            "headComment": "",
+            "tailComment": ""
+        },
+        "java": {
+            "type": {
+                "name": "namespace"
+            },
+            "value": "tutorial",
+            "headComment": "",
+            "tailComment": ""
+        },
+        "php": {
+            "type": {
+                "name": "namespace"
+            },
+            "value": "tutorial",
+            "headComment": "",
+            "tailComment": ""
+        },
+        "perl": {
+            "type": {
+                "name": "namespace"
+            },
+            "value": "tutorial",
+            "headComment": "",
+            "tailComment": ""
+        },
+        "haxe": {
+            "type": {
+                "name": "namespace"
+            },
+            "value": "tutorial",
+            "headComment": "",
+            "tailComment": ""
+        }
+    },
+    "typedef": {
+        "MyInteger": {
+            "type": {
+                "name": "i32"
+            },
+            "headComment": "",
+            "tailComment": ""
+        }
+    },
+    "const": {
+        "INT32CONSTANT": {
+            "type": {
+                "name": "i32"
+            },
+            "value": 9853,
+            "headComment": "",
+            "tailComment": ""
+        },
+        "MAPCONSTANT": {
+            "type": {
+                "name": "map",
+                "keyType": "string",
+                "valueType": "string"
+            },
+            "value": [
+                {
+                    "key": "hello",
+                    "value": "world"
+                },
+                {
+                    "key": "goodnight",
+                    "value": "moon"
+                }
+            ],
+            "headComment": "",
+            "tailComment": ""
+        }
+    },
+    "enum": {
+        "Operation": {
+            "type": {
+                "name": "enum"
+            },
+            "items": [
+                {
+                    "name": "ADD",
+                    "type": "enum",
+                    "value": 1,
+                    "headComment": "",
+                    "tailComment": ""
+                },
+                {
+                    "name": "SUBTRACT",
+                    "type": "enum",
+                    "value": 2,
+                    "headComment": "",
+                    "tailComment": ""
+                },
+                {
+                    "name": "MULTIPLY",
+                    "type": "enum",
+                    "value": 3,
+                    "headComment": "",
+                    "tailComment": ""
+                },
+                {
+                    "name": "DIVIDE",
+                    "type": "enum",
+                    "value": 4,
+                    "headComment": "",
+                    "tailComment": ""
+                }
+            ],
+            "headComment": "",
+            "tailComment": ""
+        }
+    },
+    "struct": {
+        "Work": [
+            {
+                "id": 1,
+                "type": "i32",
+                "name": "num1",
+                "headComment": "",
+                "tailComment": "",
+                "value": 0
+            },
+            {
+                "id": 2,
+                "type": "i32",
+                "name": "num2",
+                "headComment": "",
+                "tailComment": ""
+            },
+            {
+                "id": 3,
+                "type": "Operation",
+                "name": "op",
+                "headComment": "",
+                "tailComment": ""
+            },
+            {
+                "id": 4,
+                "type": "string",
+                "name": "comment",
+                "headComment": "",
+                "tailComment": "",
+                "option": "optional"
+            }
+        ]
+    },
+    "exception": {
+        "InvalidOperation": [
+            {
+                "id": 1,
+                "type": "i32",
+                "name": "whatOp",
+                "headComment": "",
+                "tailComment": ""
+            },
+            {
+                "id": 2,
+                "type": "string",
+                "name": "why",
+                "headComment": "",
+                "tailComment": "",
+                "value": "abc"
+            }
+        ]
+    },
+    "service": {
+        "Calculator": {
+            "type": {
+                "name": "service"
+            },
+            "headComment": "",
+            "tailComment": "",
+            "extends": "shared.SharedService",
+            "functions": {
+                "ping": {
+                    "type": "void",
+                    "name": "ping",
+                    "args": [],
+                    "throws": [],
+                    "oneway": false,
+                    "headComment": "",
+                    "tailComment": ""
+                },
+                "add": {
+                    "type": "i32",
+                    "name": "add",
+                    "args": [
+                        {
+                            "id": 1,
+                            "type": "i32",
+                            "name": "num1",
+                            "headComment": "",
+                            "tailComment": ""
+                        },
+                        {
+                            "id": 2,
+                            "type": "i32",
+                            "name": "num2",
+                            "headComment": "",
+                            "tailComment": "",
+                            "option": "optional"
+                        }
+                    ],
+                    "throws": [],
+                    "oneway": false,
+                    "headComment": "",
+                    "tailComment": ""
+                },
+                "calculate": {
+                    "type": "i32",
+                    "name": "calculate",
+                    "args": [
+                        {
+                            "id": 1,
+                            "type": "i32",
+                            "name": "logid",
+                            "headComment": "",
+                            "tailComment": ""
+                        },
+                        {
+                            "id": 2,
+                            "type": "Work",
+                            "name": "w",
+                            "headComment": "",
+                            "tailComment": ""
+                        }
+                    ],
+                    "throws": [
+                        {
+                            "id": 1,
+                            "type": "InvalidOperation",
+                            "name": "ouch",
+                            "headComment": "",
+                            "tailComment": ""
+                        }
+                    ],
+                    "oneway": false,
+                    "headComment": "",
+                    "tailComment": ""
+                },
+                "zip": {
+                    "type": "void",
+                    "name": "zip",
+                    "args": [],
+                    "throws": [],
+                    "oneway": true,
+                    "headComment": "",
+                    "tailComment": ""
+                }
+            }
+        }
+    }
+}
