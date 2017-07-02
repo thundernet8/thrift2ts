@@ -11,6 +11,9 @@ const argv = yargs
         return require('../package.json').version;
     })
     .alias('v', 'version')
+    .alias('i', 'input')
+    .alias('o', 'output')
+    .alias('r', 'request')
     .alias('c', 'clients')
     .usage('Usage: $0 <command> [options]')
     .example('$0 -i ./member.thrift -o ./services -r ./request', '')
@@ -59,7 +62,6 @@ try {
         let handledFiles = [];
         let primary = true;
         const recursiveGen = (input, basePath = null, isClients = false) => {
-            console.log('recursiveGen: ', isClients ? 'clients' : 'service')
             let inputFile = resolveInput(input, basePath);
             if (!basePath) {
                 basePath = dirname(inputFile)
