@@ -1,6 +1,18 @@
+[中文说明](./README-CN.md)
+
 ## Thrift2TS
 
 Parse Thrift (IDL) to TypeScript, which could be used as typed interface docs for FrontEnd.
+
+Also as an option, Thrift service clients could be generated. With these clients, a complete RPC call with Thrift data transport and protocol could be done.
+
+This make up some issues on thrift officially generated RPC service clients for browser javascript app:
+
+    * add sequence support for RPC client so that it can reuse the Websocket connection without incorrect response callback order
+
+    * moduled script file, easy to import and package, rather than many global variables in official generated client for browser
+    
+    * all generated TypeScript files introduce types support and result in more convenient development of your app
 
 [Thrift Doc](https://thrift.apache.org/docs/idl)
 
@@ -22,12 +34,12 @@ yarn global add thrift2ts
 
 ### CLI
 ```
-t2t -i [thrift file path] -o [typescript file output folder] -r [request method import path]
+t2t -i [thrift file path] -o [typescript file output folder] -r [request method import path] -c
 ```
 
 sample
 ```
-t2t -i ./common.thrift -o ./services -r ./request
+t2t -i ./common.thrift -o ./services -r ./request -c
 ```
 
 ### normal package
@@ -150,6 +162,21 @@ Thrift service will exploded into functions which are used for RPC-liked call or
 
 Please find the examples in sample folder.
 
+##### Using normal text transport without thrift rpc server
+
  * [HTTP-RPC-Request](./sample/json-rpc-request.ts)
 
  * [HTTP-API-Request](./sample/webApi-request.ts)
+
+##### Using thrift data transport protocol with thrift rpc server
+
+ * [Thrift-RPC-Request WebSocket connection](./templates/thrift-ws-request.ts)
+
+ * [Thrift-RPC-Request XHR connection](./templates/thrift-xhr-request.ts)
+
+
+### Requirements
+
+You need import [Browser Thrift](https://www.npmjs.com/package/browser-thrift) package when trying to communicate with a Thrift RPC server, which defines the thrift data transport protocol.
+
+Also you could find a demo in this package's introduction.

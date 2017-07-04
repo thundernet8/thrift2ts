@@ -1,7 +1,7 @@
 {
   "name": "thrift2ts",
-  "version": "0.3.1",
-  "description": "A thrift to typescript parser",
+  "version": "0.6.0",
+  "description": "Generate thrift RPC service clients and type definition document, all in TypeScript",
   "main": "./lib/gen.js",
   "bin": {
     "thrift2ts": "./bin/thrift2ts",
