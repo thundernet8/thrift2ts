@@ -1,6 +1,9 @@
 // Helpers
 export const thrift2TsPath = (path: string, ext: boolean = false): string => {
     path = path.replace(/(.*)\.thrift$/i, '$1Service');
+    if (!path.startsWith(".")) {
+        path = "./" + path
+    }
     return ext ? path + '.ts' : path;
 }
 
