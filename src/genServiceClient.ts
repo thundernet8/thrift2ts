@@ -53,7 +53,7 @@ header += `import IProtocol, { ProtocolClass } from "browser-thrift/src/thrift/i
 header += `import ITransport, { TransportClass } from "browser-thrift/src/thrift/interface/ITransport"\r\n\r\n`
 header += `const {${R_SPACE_4}ThriftType,${R_SPACE_4}MessageType,${R_SPACE_4}TApplicationException,${R_SPACE_4}TException\r\n} = Thrift\r\n\r\n`
 
-export default (ast: any, Request = './request'): string => {
+export default (ast: any): string => {
     let code = '';
 
     code += header;
@@ -627,11 +627,6 @@ export default (ast: any, Request = './request'): string => {
         })
         code += '}\r\n';
         return code;
-    }
-
-    // include Request
-    if (Request && ast.service) {
-        code += `import Request from "${Request}";\r\n`
     }
 
     // includes -> import

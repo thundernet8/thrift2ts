@@ -87,7 +87,7 @@ try {
             mkdirp(resolve(dirname(outputFile)));
 
             const ast = genAST(readFileSync(inputFile).toString());
-            const tsCode = isClients ? genServiceClient(ast, argv.r) : genTS(ast, argv.r);
+            const tsCode = isClients ? genServiceClient(ast) : genTS(ast, argv.r);
             writeFileSync(outputFile, tsCode);
 
             // record service clients and their file name in dict
