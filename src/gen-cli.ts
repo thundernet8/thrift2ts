@@ -2,7 +2,7 @@ import { resolve, dirname, basename, extname } from "path";
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import genAST from './genAst';
 import genTS from './genTS';
-import genServiceClient from './genServiceClient'
+import genServiceClient, { clientsIndex } from './genServiceClient'
 import * as mkdirp from 'mkdirp';
 import * as yargs from 'yargs';
 
@@ -58,6 +58,14 @@ const resolveOutput = (input, primary = false, isClients = false) => {
 }
 
 try {
+    let clientsIndexPath = null
+    let clientsDict = {}
+
+    let genClientsIndex = () => {
+        let tsCode = clientsIndex(clientsDict)
+        writeFileSync(clientsIndexPath, tsCode)
+    }
+
     let gen = (() => {
         let handledFiles = [];
         let primary = true;
@@ -81,6 +89,18 @@ try {
             const ast = genAST(readFileSync(inputFile).toString());
             const tsCode = isClients ? genServiceClient(ast, argv.r) : genTS(ast, argv.r);
             writeFileSync(outputFile, tsCode);
+
+            // record service clients and their file name in dict
+            if (isClients) {
+                let fileBasename = basename(outputFile, extname(outputFile))
+                clientsIndexPath = resolve(dirname(outputFile), 'index.ts')
+                if (clientsDict[fileBasename] === undefined) {
+                    clientsDict[fileBasename] = Object.keys(ast['service'])
+                } else {
+                    clientsDict[fileBasename] = clientsDict[fileBasename].concat(Object.keys(ast['service']))
+                }
+            }
+
             if (ast['include']) {
                 let includes: object[] = Object.keys(ast['include']).map(key => ast['include'][key]['value']);
                 includes.forEach(include => {
@@ -93,6 +113,7 @@ try {
     gen()(argv.i)
     if (argv.c) {
         gen()(argv.i, null, true)
+        genClientsIndex()
     }
 } catch (err) {
     throw err;

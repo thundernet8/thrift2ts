@@ -1,6 +1,6 @@
 import clients from './clients'
 
-import ThriftBrowser from 'thrift-browser'
+import ThriftBrowser from 'browser-thrift'
 const { TJSONProtocol,
     TBufferedTransport,
     createWSConnection,
