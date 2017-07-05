@@ -1,6 +1,6 @@
 // Helpers
-export const thrift2TsPath = (path: string, ext: boolean = false): string => {
-    path = path.replace(/(.*)\.thrift$/i, '$1Service');
+export const thrift2TsPath = (path: string, ext: boolean = false, isService: boolean = true): string => {
+    path = path.replace(/(.*)\.thrift$/i, isService ? '$1Service' : '$1Client');
     if (!path.startsWith(".")) {
         path = "./" + path
     }
