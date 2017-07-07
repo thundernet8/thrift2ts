@@ -168,7 +168,7 @@ export default {
 
 ##### 不使用Thrift数据传输协议和Thrift RPC Server
 
- * [HTTP-RPC-Request](./sample/json-rpc-request.ts)
+ * [HTTP-RPC-Request](./sample/rpc-request.ts)
 
  * [HTTP-API-Request](./sample/webApi-request.ts)
 

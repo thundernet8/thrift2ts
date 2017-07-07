@@ -164,7 +164,7 @@ Please find the examples in sample folder.
 
 ##### Using normal text transport without thrift rpc server
 
- * [HTTP-RPC-Request](./sample/json-rpc-request.ts)
+ * [HTTP-RPC-Request](./sample/rpc-request.ts)
 
  * [HTTP-API-Request](./sample/webApi-request.ts)
 
