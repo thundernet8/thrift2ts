@@ -181,6 +181,6 @@ export default {
 
 ### 必须
 
-当要连接Thrift RPC服务时你必须导入 [Browser Thrift](https://www.npmjs.com/package/browser-thrift) 包, 它定义了 Thrift 数据传输协议。
+当要连接Thrift RPC服务时你必须导入 [Browser Thrift](https://www.npmjs.com/package/browser-thrift2) 包, 它定义了 Thrift 数据传输协议。
 
 这个包里面也有一份完整的使用本工具生成代码，并与Thrift RPC服务端通信的完整演示。
