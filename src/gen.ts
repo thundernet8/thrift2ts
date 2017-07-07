@@ -1,6 +1,9 @@
-import genAST from './genAst';
-import genTS from './genTS';
+import genAST from "./genAst";
+import genTS from "./genTS";
+import prettierConfig from "./prettier-config";
+const prettier = require("prettier");
 
 export default (code: string, Request: string) => {
-    return genTS(genAST(code), Request);
-}
+    const ts = genTS(genAST(code), Request);
+    return prettier.format(ts, prettierConfig);
+};

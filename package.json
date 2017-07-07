@@ -1,22 +1,23 @@
 {
-  "name": "thrift2ts",
-  "version": "0.6.8",
-  "description": "Generate thrift RPC service clients and type definition document, all in TypeScript",
-  "main": "./lib/gen.js",
-  "bin": {
-    "thrift2ts": "./bin/thrift2ts",
-    "t2t": "./bin/t2t"
-  },
-  "scripts": {
-    "build": "tsc"
-  },
-  "repository": "git@github.com:thundernet8/thrift2ts.git",
-  "author": "wuxueqian <wuxueqian2010@hotmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "@types/node": "^7.0.29",
-    "mkdirp": "^0.5.1",
-    "typescript": "^2.3.4",
-    "yargs": "^8.0.2"
-  }
+    "name": "thrift2ts",
+    "version": "0.6.9",
+    "description": "Generate thrift RPC service clients and type definition document, all in TypeScript",
+    "main": "./lib/gen.js",
+    "bin": {
+        "thrift2ts": "./bin/thrift2ts",
+        "t2t": "./bin/t2t"
+    },
+    "scripts": {
+        "build": "tsc"
+    },
+    "repository": "git@github.com:thundernet8/thrift2ts.git",
+    "author": "wuxueqian <wuxueqian2010@hotmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "@types/node": "^7.0.29",
+        "mkdirp": "^0.5.1",
+        "prettier": "^1.5.2",
+        "typescript": "^2.3.4",
+        "yargs": "^8.0.2"
+    }
 }

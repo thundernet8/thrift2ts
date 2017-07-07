@@ -6,6 +6,6 @@ export class ThriftSyntaxError extends SyntaxError {
         super(message);
         this.context = context;
         this.line = line;
-        this.name = 'THRIFT_SYNTAX_ERROR'
+        this.name = "THRIFT_SYNTAX_ERROR";
     }
 }
