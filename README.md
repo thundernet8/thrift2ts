@@ -177,6 +177,6 @@ Please find the examples in sample folder.
 
 ### Requirements
 
-You need import [Browser Thrift](https://www.npmjs.com/package/browser-thrift) package when trying to communicate with a Thrift RPC server, which defines the thrift data transport protocol.
+You need import [Browser Thrift](https://www.npmjs.com/package/browser-thrift2) package when trying to communicate with a Thrift RPC server, which defines the thrift data transport protocol.
 
 Also you could find a demo in this package's introduction.
