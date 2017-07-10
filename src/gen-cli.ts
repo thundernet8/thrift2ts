@@ -28,7 +28,8 @@ const argv = yargs
         "r",
         "webApi or JSON-RPC request implementation file path, will be imported in generated typescript file"
     )
-    .epilog("Copyright " + new Date().getFullYear()).argv;
+    .epilog("Copyright " + new Date().getFullYear())
+    .help().argv;
 
 // const extName = extname(argv.i);
 // const inputFile = resolve(argv.i + (extName ? '' : '.thrift'));
