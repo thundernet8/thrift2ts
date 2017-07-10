@@ -15,6 +15,7 @@ const argv = yargs
     .alias("o", "output")
     .alias("r", "request")
     .alias("c", "clients")
+    .alias("h", "help")
     .usage("Usage: $0 <command> [options]")
     .example("$0 -i ./member.thrift -o ./services -r ./request", "")
     .demandOption(["i"])
