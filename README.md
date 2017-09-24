@@ -18,6 +18,10 @@ This make up some issues on thrift officially generated RPC service clients for 
 
 [TypeScript Doc](https://www.typescriptlang.org/docs/home.html)
 
+## Demo
+
+[Thrift2TS Demo Project](https://github.com/thundernet8/Thrift2TS-Flow-Demo)
+
 ## Install
 
 npm

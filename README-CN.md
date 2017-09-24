@@ -22,6 +22,10 @@ Thrift官方提供了JS的生成工具，那么本工具的存在主要是为了
 
 [关于TypeScript](https://www.typescriptlang.org/docs/home.html)
 
+## 示例
+
+[Thrift2TS Demo Project](https://github.com/thundernet8/Thrift2TS-Flow-Demo)
+
 ## 安装
 
 npm
