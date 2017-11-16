@@ -1,6 +1,6 @@
 {
     "name": "thrift2ts",
-    "version": "0.7.6",
+    "version": "0.8.0",
     "description": "Generate thrift RPC service clients and type definition document, all in TypeScript",
     "main": "./lib/gen.js",
     "bin": {
