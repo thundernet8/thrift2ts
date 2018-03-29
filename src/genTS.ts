@@ -129,6 +129,16 @@ export default (ast: any, Request = "./request"): string => {
         return newConsts;
     };
 
+    const typedefsHandler = (typedefs: object[]): string => {
+        let newTypedefs = "";
+        Object.keys(typedefs).forEach(key => {
+            newTypedefs += `${NEW_LINE}export type ${key} = ${valueTypeTransformer(
+                typedefs[key]["type"]
+            )}; ${NEW_LINE}`;
+        });
+        return newTypedefs;
+    };
+
     const enumsHandler = (enums: object[]): string => {
         let newEnums = "";
         Object.keys(enums).forEach(key => {
@@ -250,6 +260,11 @@ export default (ast: any, Request = "./request"): string => {
     // const -> const
     if (ast.const) {
         code += constsHandler(ast.const);
+    }
+
+    // typedef -> type
+    if (ast.typedef) {
+        code += typedefsHandler(ast.typedef)
     }
 
     // enum -> interface
