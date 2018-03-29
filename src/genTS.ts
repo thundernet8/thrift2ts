@@ -138,13 +138,13 @@ export default (ast: any, Request = "./request"): string => {
     };
 
     const enumHandler = (name, items: object[]): string => {
-        let lastValue = -1;
+        // let lastValue = -1;
         let code = `${NEW_LINE}export enum ${name} {`;
         items.forEach((item, index) => {
             if (item["value"] === undefined) {
-                item["value"] = lastValue + 1;
+                item["value"] = `"${item["name"]}"`;
             }
-            lastValue = item["value"];
+            // lastValue = item["value"];
             code += `${NEW_LINE}${item["name"]} = ${item["value"]}`;
             if (index < items.length - 1) {
                 code += ",";
