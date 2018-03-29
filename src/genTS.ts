@@ -129,6 +129,16 @@ export default (ast: any, Request = "./request"): string => {
         return newConsts;
     };
 
+    const typedefsHandler = (typedefs: object[]): string => {
+        let newTypedefs = "";
+        Object.keys(typedefs).forEach(key => {
+            newTypedefs += `${NEW_LINE}export type ${key} = ${valueTypeTransformer(
+                typedefs[key]["type"]
+            )}; ${NEW_LINE}`;
+        });
+        return newTypedefs;
+    };
+
     const enumsHandler = (enums: object[]): string => {
         let newEnums = "";
         Object.keys(enums).forEach(key => {
@@ -138,13 +148,13 @@ export default (ast: any, Request = "./request"): string => {
     };
 
     const enumHandler = (name, items: object[]): string => {
-        let lastValue = -1;
+        // let lastValue = -1;
         let code = `${NEW_LINE}export enum ${name} {`;
         items.forEach((item, index) => {
             if (item["value"] === undefined) {
-                item["value"] = lastValue + 1;
+                item["value"] = `"${item["name"]}"`;
             }
-            lastValue = item["value"];
+            // lastValue = item["value"];
             code += `${NEW_LINE}${item["name"]} = ${item["value"]}`;
             if (index < items.length - 1) {
                 code += ",";
@@ -252,6 +262,11 @@ export default (ast: any, Request = "./request"): string => {
         code += constsHandler(ast.const);
     }
 
+    // typedef -> type
+    if (ast.typedef) {
+        code += typedefsHandler(ast.typedef)
+    }
+
     // enum -> interface
     if (ast.enum) {
         code += enumsHandler(ast.enum);
@@ -273,7 +288,7 @@ export default (ast: any, Request = "./request"): string => {
     }
 
     // service -> functions
-    if (ast.service) {
+    if (Request && ast.service) {
         code += servicesHandler(ast.service);
     }
 
