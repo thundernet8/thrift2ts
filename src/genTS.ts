@@ -288,7 +288,7 @@ export default (ast: any, Request = "./request"): string => {
     }
 
     // service -> functions
-    if (ast.service) {
+    if (Request && ast.service) {
         code += servicesHandler(ast.service);
     }
 
