@@ -1,6 +1,6 @@
 {
     "name": "thrift2ts",
-    "version": "0.8.0",
+    "version": "0.8.1",
     "description": "Generate thrift RPC service clients and type definition document, all in TypeScript",
     "main": "./lib/gen.js",
     "bin": {
@@ -8,7 +8,8 @@
         "t2t": "./bin/t2t"
     },
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "prepublishOnly": "npm run build"
     },
     "repository": "git@github.com:thundernet8/thrift2ts.git",
     "author": "wuxueqian <wuxueqian2010@hotmail.com>",
